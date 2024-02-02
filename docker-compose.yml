@@ -1,35 +1,39 @@
 version: "3"
 
 services:
-  frontend:
-    build: ./frontend
-    restart: always
-    container_name: container_frontend
-    ports:
-      -3000:3000
-    networks:
-      - rede-2
-    volumes:
-      -./frontend/src:/app/src
-    depends_on:
-      - backend
+  # frontend:
+  #   build: ./frontend
+  #   image: front_image
+  #   ports:
+  #     - 3000:3000
+  #   restart: always
+  #   container_name: container_frontend
+  #   networks:
+  #     - rede-2
+  #   volumes:
+  #     - ./frontend/src:/app/src
+  #     - ./frontend/package.json:/app/package.json
+  #   depends_on:
+  #     - backend
   backend:
     build: ./backend
+    image: back_image
+    ports: 
+      - 3002:3002
     restart: always
     container_name: container_backend
     environment:
-      - MYSQL_HOST: database
-      - MYSQL_PORT: 3003
-      - MYSQL_USER: root
-      - MYSQL_PASSWORD: root
-      - DB_NAME: database
+      - MYSQL_HOST=database
+      - MYSQL_PORT=3003
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - DB_NAME=database
     volumes:
       - ./backend/src:/app/src
+      - ./backend/package.json:/app/package.json
     networks:
       - rede-1
       - rede-2
-    ports: 
-      - 3002:3002
     depends_on:
       - database
   database:
