@@ -1,12 +1,22 @@
 const connection = require('./connection')
 
-const register = (nome, email, senha) =>
+const register = (body) =>
     connection.execute(
         `INSERT INTO login (nome, email, senha) VALUES
             (?,?,?);`,
-            [nome,email,senha]
-    )
+            [body.nome,body.email,body.senha]
+)
+
+const update = (email, body) =>
+    connection.execute(
+        `UPDATE login
+         SET nome = ?, email = ?, senha = ?
+         WHERE email = ?;`,
+            [body.nome,body.email,body.senha, email]
+)
+
 
 module.exports = {
-    register
+    register,
+    update
 }
