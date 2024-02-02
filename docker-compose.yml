@@ -2,27 +2,40 @@ version: "3"
 
 services:
   frontend:
-    build:
+    build: ./frontend
+    container_name: name
     networks:
       - rede-2
     depends_on:
       - backend
   backend:
-    build:
+    build: ./backend
+    restart: always
+    container_name: container_backend
+    environment:
+      - MYSQL_HOST=database
+      - MYSQL_PORT=3002
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - DB_NAME=database
+    volumes:
+      - ./backend/src:/src
     networks:
       - rede-1
       - rede-2
+    ports: 
+      - 3002:3002
     depends_on:
-      - Database
+      - database
   database:
     image: mysql
     restart: always
-    container_name: DB_E
+    container_name: database
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=DB_E
+      - MYSQL_DATABASE=database
     volumes:
-      - ./DB_E.sql:/docker-entrypoint-initdb.d/DB_E.sql
+      - ./database.sql:/docker-entrypoint-initdb.d/database.sql
     networks:
       - rede-1
     ports:
