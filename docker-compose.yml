@@ -3,9 +3,14 @@ version: "3"
 services:
   frontend:
     build: ./frontend
-    container_name: name
+    restart: always
+    container_name: container_frontend
+    ports:
+      -3000:3000
     networks:
       - rede-2
+    volumes:
+      -./frontend/src:/app/src
     depends_on:
       - backend
   backend:
@@ -13,13 +18,13 @@ services:
     restart: always
     container_name: container_backend
     environment:
-      - MYSQL_HOST=database
-      - MYSQL_PORT=3002
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=root
-      - DB_NAME=database
+      - MYSQL_HOST: database
+      - MYSQL_PORT: 3003
+      - MYSQL_USER: root
+      - MYSQL_PASSWORD: root
+      - DB_NAME: database
     volumes:
-      - ./backend/src:/src
+      - ./backend/src:/app/src
     networks:
       - rede-1
       - rede-2
