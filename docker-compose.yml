@@ -16,8 +16,17 @@ services:
       - Database
   database:
     image: mysql
+    restart: always
+    container_name: DB_E
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=DB_E
+    volumes:
+      - ./DB_E.sql:/docker-entrypoint-initdb.d/DB_E.sql
     networks:
       - rede-1
+    ports:
+      - 3003:3003
 
 networks:
   rede-1:
