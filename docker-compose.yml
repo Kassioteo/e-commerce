@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  frontend:
+    build:
+    networks:
+      - rede-2
+    depends_on:
+      - backend
+  backend:
+    build:
+    networks:
+      - rede-1
+      - rede-2
+    depends_on:
+      - Database
+  database:
+    image: mysql
+    networks:
+      - rede-1
+
+networks:
+  rede-1:
+  rede-2:
