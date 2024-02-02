@@ -1,7 +1,3 @@
-const express = require('express')
-
-const app = express()
-
-app.get('/',(req,res) => res.sendStatus(200))
+const app = require('./app')
 
 app.listen(3002, () => console.log('start'));
