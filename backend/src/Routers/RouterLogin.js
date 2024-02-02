@@ -10,8 +10,8 @@ router.post("/", ControllerLogin.register)
 // atualizar
 router.put("/:email", ControllerLogin.update)
 
-// // logar
-// router.get("/", ControllerLogin.logar)
+// logar
+router.get("/", ControllerLogin.login)
 
 // deletar
 router.delete("/:email", ControllerLogin.del)

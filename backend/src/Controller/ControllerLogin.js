@@ -30,9 +30,23 @@ const del = async ({ params }, res) => {
   }
 };
 
+const login = async ({ body }, res) => {
+  try {
+    const result = await ServiceLogin.login(body);
+    if(typeof result === "string") {
+      return res.status(404).json({message: result})
+    }
+    return res.status(200).json({ message: "validado", body });
+  } catch (err) {
+    console.log("ControllerLogin.del: ", err.messsage);
+    res.status(500).json({ messageError: err.message });
+  }
+};
+
 
 module.exports = {
   register,
   update,
-  del
+  del,
+  login
 };

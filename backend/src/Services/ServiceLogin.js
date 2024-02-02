@@ -31,8 +31,26 @@ const del = async (email) => {
   }
 };
 
+const login = async (body) => {
+  try {
+    const [validEmail] = await ModelLogin.getEmail(body.email);
+    const [validSenha] = await ModelLogin.getSenha(body.senha);
+    if(validEmail.length === 0) {
+      return "Email invalido"
+    }
+    if(validSenha.length === 0) {
+      return "Senha invalido"
+    }
+    return body
+  } catch (err) {
+    console.log("ServiceLogin.del: ", err);
+    throw new Error(`SeriveError: ${err.message}`);
+  }
+};
+
 module.exports = {
   register,
   update,
-  del
+  del,
+  login
 };

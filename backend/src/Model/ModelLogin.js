@@ -22,10 +22,26 @@ const del = (email) =>
             [email]
 )
 
+const getEmail = (email) =>
+    connection.execute(
+        `SELECT * FROM login
+         WHERE email = ?;`,
+            [email]
+)
+
+const getSenha = (senha) =>
+    connection.execute(
+        `SELECT * FROM login
+         WHERE senha = ?;`,
+            [senha]
+)
+
 
 
 module.exports = {
     register,
     update,
-    del
+    del,
+    getEmail,
+    getSenha
 }
