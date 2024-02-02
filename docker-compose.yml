@@ -2,22 +2,53 @@ version: "3"
 
 services:
   frontend:
-    build:
+    build: ./frontend
+    image: front_image
+    ports:
+      - 3000:3000
+    restart: always
+    container_name: container_front
     networks:
       - rede-2
+    volumes:
+      - ./frontend/vite-project:/app/vite-project
+      - ./frontend/package.json:/app/package.json
     depends_on:
       - backend
   backend:
-    build:
+    build: ./backend
+    image: back_image
+    ports: 
+      - 3002:3002
+    restart: always
+    container_name: container_back
+    environment:
+      - MYSQL_HOST=database
+      - MYSQL_PORT=3003
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - DB_NAME=database
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/package.json:/app/package.json
     networks:
       - rede-1
       - rede-2
     depends_on:
-      - Database
+      - database
   database:
     image: mysql
+    restart: always
+    container_name: container_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=database
+    volumes:
+      - ./database.sql:/docker-entrypoint-initdb.d/database.sql
     networks:
       - rede-1
+    ports:
+      - 3003:3003
 
 networks:
   rede-1:

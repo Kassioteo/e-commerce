@@ -4,7 +4,11 @@
   "description": "lojinha de tudo",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "docker-compose up -d",
+    "dockerR": "docker rm -f container_front container_back container_db && docker-compose up -d --build",
+    "TBack": "docker exec -it container_back sh",
+    "TFront": "docker exec -it container_front sh",
+    "TDB": "docker exec -it container_db sh"
   },
   "repository": {
     "type": "git",
