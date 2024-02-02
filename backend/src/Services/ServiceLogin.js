@@ -14,13 +14,25 @@ const register = async (body) => {
 const update = async (email, body) => {
   try {
     await ModelLogin.update(email,body);
+    return
   } catch (err) {
-    console.log("ServiceLogin.register: ", err);
+    console.log("ServiceLogin.update: ", err);
+    throw new Error(`SeriveError: ${err.message}`);
+  }
+};
+
+const del = async (email) => {
+  try {
+    await ModelLogin.del(email);
+    return
+  } catch (err) {
+    console.log("ServiceLogin.del: ", err);
     throw new Error(`SeriveError: ${err.message}`);
   }
 };
 
 module.exports = {
   register,
-  update
+  update,
+  del
 };

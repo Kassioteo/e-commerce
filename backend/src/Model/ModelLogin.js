@@ -15,8 +15,17 @@ const update = (email, body) =>
             [body.nome,body.email,body.senha, email]
 )
 
+const del = (email) =>
+    connection.execute(
+        `DELETE FROM login
+         WHERE email = ?;`,
+            [email]
+)
+
+
 
 module.exports = {
     register,
-    update
+    update,
+    del
 }

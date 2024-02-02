@@ -13,7 +13,7 @@ router.put("/:email", ControllerLogin.update)
 // // logar
 // router.get("/", ControllerLogin.logar)
 
-// // deletar
-// router.delete("/:email", ControllerLogin.deletar)
+// deletar
+router.delete("/:email", ControllerLogin.del)
 
 module.exports = router;
