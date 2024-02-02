@@ -7,3 +7,7 @@ const register = async(nome, email, senha) => {
             [nome,email,senha]
     )
 }
+
+module.exports = {
+    register
+}
