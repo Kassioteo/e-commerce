@@ -11,7 +11,7 @@ services:
     networks:
       - rede-2
     volumes:
-      - ./frontend/src:/app/src
+      - ./frontend/vite-project:/app/vite-project
       - ./frontend/package.json:/app/package.json
     depends_on:
       - backend

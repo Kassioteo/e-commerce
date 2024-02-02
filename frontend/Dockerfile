@@ -6,6 +6,6 @@ COPY ./package.json .
 
 RUN npm install
 
-COPY ./src src
+COPY ./vite-project vite-project
 
 CMD [ "npm", "run", "dev" ]
