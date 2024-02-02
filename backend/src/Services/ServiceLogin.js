@@ -8,6 +8,7 @@ const register = async (body) => {
         return result
     }catch (err) {
         console.log("ServiceLogin.register: ", err.messsage);
+        throw new Error(`SeriveError: ${err}`)
     }
 }
 
