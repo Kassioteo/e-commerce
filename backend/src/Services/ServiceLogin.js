@@ -1,14 +1,14 @@
 const { ModelLogin } = require("../Model");
 
 const register = async (body) => {
+    const {nome,email,senha} = body
     try{
-        const {nome,email,senha} = body
         const [result] = await ModelLogin.register(nome,email,senha)
         console.log(result);
         return result
     }catch (err) {
-        console.log("ServiceLogin.register: ", err.messsage);
-        throw new Error(`SeriveError: ${err}`)
+        console.log("ServiceLogin.register: ", err);
+        throw new Error(`SeriveError: ${err.message}`)
     }
 }
 

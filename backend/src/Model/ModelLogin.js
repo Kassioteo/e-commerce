@@ -1,12 +1,11 @@
 const connection = require('./connection')
 
-const register = async(nome, email, senha) => {
+const register = (nome, email, senha) =>
     connection.execute(
-        `INSERT INTO database (nome, email, senha) VALUES
+        `INSERT INTO login (nome, email, senha) VALUES
             (?,?,?);`,
             [nome,email,senha]
     )
-}
 
 module.exports = {
     register
