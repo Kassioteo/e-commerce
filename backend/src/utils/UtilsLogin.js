@@ -5,15 +5,15 @@ const validEmail = async (email) => {
   if (validEmail.length === 0) {
     return {status: true};
   }
-  return {status: false, body: validEmail};
+  return {status: false, body: validEmail[0]};
 };
 
 const validSenha = async (senha) => {
   const [validSenha] = await ModelLogin.getSenha(senha);
   if (validSenha.length === 0) {
-    return true;
+    return {status: true};
   }
-  return false;
+  return {status: false, body: validSenha[0]};
 };
 
 module.exports = {

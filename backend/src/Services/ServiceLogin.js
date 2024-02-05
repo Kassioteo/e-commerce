@@ -1,5 +1,6 @@
 const { ModelLogin } = require("../Model");
 const { UtilsLogin } = require("../utils");
+const { newToken } = require("../utils/JWT");
 
 const register = async (body) => {
   try {
@@ -32,14 +33,15 @@ const del = async (email) => {
 const login = async (body) => {
   try {
     const isvalidEmail = await UtilsLogin.validEmail(body.email)
-    const isvalidSenha = await UtilsLogin.validEmail(body.senha)
-    if(isvalidEmail) {
+    const isvalidSenha = await UtilsLogin.validSenha(body.senha)
+    if(isvalidEmail.status) {
       return "Email invalido"
     }
-    if(isvalidSenha) {
+    if(isvalidSenha.status) {
       return "Senha invalido"
     }
-    return body
+    // console.log(newToken(body));
+    return isvalidEmail.body
   } catch (err) {
     console.log("ServiceLogin.del: ", err);
     throw new Error(`SeriveError: ${err.message}`);
