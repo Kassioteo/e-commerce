@@ -1,7 +1,7 @@
 const { ModelLogin } = require("../Model");
+const { UtilsLogin } = require("../utils");
 
 const register = async (body) => {
-  const { nome, email, senha } = body;
   try {
     const [result] = await ModelLogin.register(body);
     return { newId: result.insertId, ...body };
@@ -14,7 +14,6 @@ const register = async (body) => {
 const update = async (email, body) => {
   try {
     await ModelLogin.update(email,body);
-    return
   } catch (err) {
     console.log("ServiceLogin.update: ", err);
     throw new Error(`SeriveError: ${err.message}`);
@@ -24,7 +23,6 @@ const update = async (email, body) => {
 const del = async (email) => {
   try {
     await ModelLogin.del(email);
-    return
   } catch (err) {
     console.log("ServiceLogin.del: ", err);
     throw new Error(`SeriveError: ${err.message}`);
@@ -33,12 +31,12 @@ const del = async (email) => {
 
 const login = async (body) => {
   try {
-    const [validEmail] = await ModelLogin.getEmail(body.email);
-    const [validSenha] = await ModelLogin.getSenha(body.senha);
-    if(validEmail.length === 0) {
+    const isvalidEmail = await UtilsLogin.validEmail(body.email)
+    const isvalidSenha = await UtilsLogin.validEmail(body.senha)
+    if(isvalidEmail) {
       return "Email invalido"
     }
-    if(validSenha.length === 0) {
+    if(isvalidSenha) {
       return "Senha invalido"
     }
     return body

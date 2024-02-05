@@ -1,17 +1,18 @@
 const express = require("express");
 
 const { ControllerLogin } = require("../Controller");
+const { MiddlewareLogin } = require("../Middleware");
 
 const router = express.Router();
 
 // registrar
-router.post("/", ControllerLogin.register)
+router.post("/", MiddlewareLogin.validData, ControllerLogin.register)
 
 // atualizar
-router.put("/:email", ControllerLogin.update)
+router.put("/:email", MiddlewareLogin.validData, ControllerLogin.update)
 
 // logar
-router.get("/", ControllerLogin.login)
+router.get("/", MiddlewareLogin.validData, ControllerLogin.login)
 
 // deletar
 router.delete("/:email", ControllerLogin.del)
