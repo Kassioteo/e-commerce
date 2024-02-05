@@ -23,7 +23,12 @@ const update = async (email, body) => {
 
 const del = async (email) => {
   try {
-    await ModelLogin.del(email);
+    const [result] = await ModelLogin.del(email);
+    console.log(result.affectedRows);
+    if (result.affectedRows !== 0) {
+      return true
+    }
+    return false
   } catch (err) {
     console.log("ServiceLogin.del: ", err);
     throw new Error(`SeriveError: ${err.message}`);

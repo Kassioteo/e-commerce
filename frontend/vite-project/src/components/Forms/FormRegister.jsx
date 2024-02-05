@@ -1,27 +1,46 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function FormRegsiter() {
-    const [nome, setNome] = useState()
-    const [email, setEmail] = useState()
-    const [senha, setSenha] = useState()
-    const validUser = async () => {
-        const request = await axios.post("http://localhost:3002/login",{
-                nome: "Jose Lopes",
-                email: "jose@gmail.com",
-                senha: "jo123"
+    const [nome, setNome] = useState('')
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
+
+    const navigate = useNavigate();
+    
+    const register = async () => {
+        const {data} = await axios.post("http://localhost:3002/login/register",{
+                nome,
+                email,
+                senha
     })
-        console.log(request.data);
+        navigate('/')
     }
 
     return (
         <form onSubmit={(e) => e.preventDefault()}>
-            <input type="text" placeholder="nome" />
-            <input type="text" placeholder="Email" />
-            <input type="password" placeholder="Senha"/>
+            <input 
+                type="text" 
+                placeholder="nome" 
+                value={nome} 
+                onChange={({target}) => setNome(target.value)}
+            />
+            <input 
+                type="text" 
+                placeholder="Email" 
+                value={email} 
+                onChange={({target}) => setEmail(target.value)}
+            />
+            <input 
+                type="password" 
+                placeholder="Senha"
+                value={senha} 
+                onChange={({target}) => setSenha(target.value)}
+            />
             <br/>
-            <button onClick={validUser}>registrar</button>
-            <button>logar</button>
+            <button onClick={register}>registrar</button>
+            <button onClick={() => navigate('/')}>logar</button>
         </form>
     )
 }

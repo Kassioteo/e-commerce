@@ -4,8 +4,8 @@ import axios from "axios";
 
 
 export default function FormLogin() {
-    const [email, setEmail] = useState()
-    const [senha, setSenha] = useState()
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
     
     const navigate = useNavigate();
     
@@ -13,16 +13,12 @@ export default function FormLogin() {
         try{
             const {data} = await axios.post("http://localhost:3002/login",{
                     nome: "Jose Lopes",
-                    email: "kassio@gmail.com",
-                    senha: "ka123"
+                    email,
+                    senha
         })
-        console.log(data);
-        
         if (data.message === "validado") {
                 return navigate("/");
             }
-            console.log("no");
-
         } catch({response: {data}}) {
             console.log(data);
             alert(data.message);
@@ -31,8 +27,18 @@ export default function FormLogin() {
 
     return (
         <form onSubmit={(e) => e.preventDefault()}>
-            <input type="text" placeholder="Email" />
-            <input type="password" placeholder="Senha"/>
+            <input 
+                type="text" 
+                placeholder="Email" 
+                value={email} 
+                onChange={({target}) => setEmail(target.value)}
+            />
+            <input 
+                type="password" 
+                placeholder="Senha" 
+                value={senha} 
+                onChange={({target}) => setSenha(target.value)}
+            />
             <br/>
             <button onClick={validUser}>Login</button>
             <button>Cadastrar</button>

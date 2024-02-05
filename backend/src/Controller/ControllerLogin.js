@@ -22,8 +22,11 @@ const update = async ({ body, params }, res) => {
 
 const del = async ({ params }, res) => {
   try {
-    await ServiceLogin.del(params.email);
-    res.status(200).json({ message: "deletado" });
+    const result = await ServiceLogin.del(params.email);
+    if (result) {
+      return res.status(200).json({ message: "deletado" });
+    }
+    return res.status(400).json({message: "not Found"})
   } catch (err) {
     console.log("ControllerLogin.del: ", err.messsage);
     res.status(500).json({ messageError: err.message });
