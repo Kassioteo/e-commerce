@@ -6,13 +6,13 @@ const { MiddlewareLogin } = require("../Middleware");
 const router = express.Router();
 
 // registrar
-router.post("/", MiddlewareLogin.validData, ControllerLogin.register)
+router.post("/new", MiddlewareLogin.validData, ControllerLogin.register)
 
 // atualizar
 router.put("/:email", MiddlewareLogin.validData, ControllerLogin.update)
 
 // logar
-router.get("/", MiddlewareLogin.validData, ControllerLogin.login)
+router.post("/", MiddlewareLogin.validData, ControllerLogin.login)
 
 // deletar
 router.delete("/:email", ControllerLogin.del)
