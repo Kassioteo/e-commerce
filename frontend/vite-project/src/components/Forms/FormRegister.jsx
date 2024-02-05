@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function FormRegsiter() {
+    const [nome, setNome] = useState()
     const [email, setEmail] = useState()
     const [senha, setSenha] = useState()
     const validUser = async () => {
@@ -15,11 +16,12 @@ export default function FormRegsiter() {
 
     return (
         <form onSubmit={(e) => e.preventDefault()}>
+            <input type="text" placeholder="nome" />
             <input type="text" placeholder="Email" />
             <input type="password" placeholder="Senha"/>
             <br/>
-            <button onClick={validUser}>login</button>
-            <button>cadastrar</button>
+            <button onClick={validUser}>registrar</button>
+            <button>logar</button>
         </form>
     )
 }
