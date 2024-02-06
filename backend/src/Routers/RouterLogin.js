@@ -1,20 +1,20 @@
 const express = require("express");
 
 const { ControllerLogin } = require("../Controller");
-const { MiddlewareLogin } = require("../Middleware");
+const { MiddlewareLogin, MiddlewareJWT } = require("../Middleware");
 
 const router = express.Router();
 
 // registrar
-router.post("/register", MiddlewareLogin.validData, ControllerLogin.register)
+router.post("/register", MiddlewareLogin.validData, ControllerLogin.register, MiddlewareJWT.genereteToken)
 
 // atualizar
-router.put("/:email", MiddlewareLogin.validData, ControllerLogin.update)
+router.put("/",MiddlewareJWT.decodeToken, MiddlewareLogin.validData, ControllerLogin.update)
 
 // logar
-router.post("/", MiddlewareLogin.validData, ControllerLogin.login)
+router.post("/", MiddlewareLogin.validLog, ControllerLogin.login, MiddlewareJWT.genereteToken)
 
 // deletar
-router.delete("/:email", ControllerLogin.del)
+router.delete("/",MiddlewareJWT.decodeToken, ControllerLogin.del)
 
 module.exports = router;

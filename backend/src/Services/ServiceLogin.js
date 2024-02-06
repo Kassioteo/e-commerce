@@ -1,29 +1,30 @@
 const { ModelLogin } = require("../Model");
 const { UtilsLogin } = require("../utils");
-const { newToken } = require("../utils/JWT");
 
 const register = async (body) => {
+  console.log(body);
   try {
-    const [result] = await ModelLogin.register(body);
-    return { newId: result.insertId, ...body };
+    const [result] = await ModelLogin.register(body);;
+    return await ModelLogin.getId(result.insertId);;
+    
   } catch (err) {
     console.log("ServiceLogin.register: ", err);
     throw new Error(`SeriveError: ${err.message}`);
   }
 };
 
-const update = async (email, body) => {
+const update = async (id, body) => {
   try {
-    await ModelLogin.update(email,body);
+    await ModelLogin.update(id,body);
   } catch (err) {
     console.log("ServiceLogin.update: ", err);
     throw new Error(`SeriveError: ${err.message}`);
   }
 };
 
-const del = async (email) => {
+const del = async (id) => {
   try {
-    const [result] = await ModelLogin.del(email);
+    const [result] = await ModelLogin.del(id);
     console.log(result.affectedRows);
     if (result.affectedRows !== 0) {
       return true
@@ -45,7 +46,7 @@ const login = async (body) => {
     if(isvalidSenha.status) {
       return "Senha invalido"
     }
-    // console.log(newToken(body));
+    console.log(isvalidEmail.body);
     return isvalidEmail.body
   } catch (err) {
     console.log("ServiceLogin.del: ", err);

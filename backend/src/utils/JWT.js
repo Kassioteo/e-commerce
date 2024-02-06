@@ -8,9 +8,9 @@ const jwtConfig = {
 
     const newToken = (data) => jwt.sign(data, secret, jwtConfig);
 
-    const decoded = (token) => jwt.verify(token, secret);
+    const decode = (token) => jwt.verify(token, secret);
 
     module.exports = {
         newToken,
-        decoded
+        decode
     }

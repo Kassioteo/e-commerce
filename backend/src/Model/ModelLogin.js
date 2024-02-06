@@ -7,24 +7,24 @@ const register = (body) =>
             [body.nome,body.email,body.senha]
 )
 
-const update = (email, body) =>
+const update = (id, body) =>
     connection.execute(
         `UPDATE login
          SET nome = ?, email = ?, senha = ?
-         WHERE email = ?;`,
-            [body.nome,body.email,body.senha, email]
+         WHERE id = ?;`,
+            [body.nome,body.email,body.senha, id]
 )
 
-const del = (email) =>
+const del = (id) =>
     connection.execute(
         `DELETE FROM login
-         WHERE email = ?;`,
-            [email]
+         WHERE id = ?;`,
+            [id]
 )
 
 const getEmail = (email) =>
     connection.execute(
-        `SELECT * FROM login
+        `SELECT id, nome, email FROM login
          WHERE email = ?;`,
             [email]
 )
@@ -36,6 +36,12 @@ const getSenha = (senha) =>
             [senha]
 )
 
+const getId = (id) =>
+    connection.execute(
+        `SELECT * FROM login
+         WHERE id = ?;`,
+            [id]
+)
 
 
 module.exports = {
@@ -43,5 +49,6 @@ module.exports = {
     update,
     del,
     getEmail,
-    getSenha
+    getSenha,
+    getId
 }

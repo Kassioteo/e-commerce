@@ -12,13 +12,13 @@ export default function FormLogin() {
     const validUser = async () => {
         try{
             const {data} = await axios.post("http://localhost:3002/login",{
-                    nome: "Jose Lopes",
                     email,
                     senha
         })
         if (data.message === "validado") {
+                console.log(data);
                 return navigate("/");
-            }
+        }
         } catch({response: {data}}) {
             console.log(data);
             alert(data.message);
