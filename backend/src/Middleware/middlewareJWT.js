@@ -1,7 +1,6 @@
 const { newToken, decode } = require("../utils/JWT");
 
 const genereteToken = ({ body: {data} }, res) => {
-  console.log(data);
   const token = newToken(data);
   res.status(200).json({ token, nome: data.nome, email: data.email });
 };

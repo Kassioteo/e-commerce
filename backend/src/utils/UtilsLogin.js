@@ -1,22 +1,25 @@
 const { ModelLogin } = require("../Model");
 
-const validEmail = async (email) => {
-  const [validEmail] = await ModelLogin.getEmail(email);
-  if (validEmail.length === 0) {
+const ExistEmail = async (email) => {
+  const [result] = await ModelLogin.getEmail(email);
+  if (result.length === 0) {
     return {status: true};
   }
-  return {status: false, body: validEmail[0]};
+  return {status: false, body: result[0]};
 };
 
-const validSenha = async (senha) => {
-  const [validSenha] = await ModelLogin.getSenha(senha);
-  if (validSenha.length === 0) {
-    return {status: true};
+const ExistClient = async (client) => {
+  const {status, body} = await ExistEmail(client.email)
+  if (status) {
+    return {status: true, message: "Email invalid"};
   }
-  return {status: false, body: validSenha[0]};
+  if (!body.senha === client.senha) {
+    return {status: true, message: "Senha invalid"};
+  }
+  return {status: false, body };
 };
+
 
 module.exports = {
-    validEmail,
-    validSenha
+    ExistClient
 }

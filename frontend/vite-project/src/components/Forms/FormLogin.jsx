@@ -9,16 +9,17 @@ export default function FormLogin() {
     
     const navigate = useNavigate();
     
-    const validUser = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
         try{
             const {data} = await axios.post("http://localhost:3002/login",{
                     email,
                     senha
         })
-        if (data.message === "validado") {
                 console.log(data);
+                localStorage.clear()
+                localStorage.setItem('client',JSON.stringify(data))
                 return navigate("/");
-        }
         } catch({response: {data}}) {
             console.log(data);
             alert(data.message);
@@ -26,7 +27,7 @@ export default function FormLogin() {
     }
 
     return (
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={handleSubmit}>
             <input 
                 type="text" 
                 placeholder="Email" 
@@ -40,8 +41,7 @@ export default function FormLogin() {
                 onChange={({target}) => setSenha(target.value)}
             />
             <br/>
-            <button onClick={validUser}>Login</button>
-            <button>Cadastrar</button>
+            <button>Login</button>
             <button onClick={() => navigate('/register')}>Registrar</button>
         </form>
     )

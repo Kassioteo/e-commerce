@@ -45,10 +45,6 @@ const validLog = ({ body }, res, next) => {
   return next()
 };
 
-const ExistEmail = (email) => {
-    UtilsLogin.validEmail
-}
-
 module.exports = {
     validData,
     validLog

@@ -2,9 +2,11 @@ const { ServiceLogin } = require("../Services");
 
 const register = async ({ body }, res, next) => {
   try {
-    const [[result]] = await ServiceLogin.register(body);
-    console.log(result);
-    body.data = result
+    const result = await ServiceLogin.register(body);
+    if (result.status === false) {
+      return res.status(400).json({ message: "email exist" });
+    }
+    body.data = result;
     next()
   } catch (err) {
     console.log("ControllerLogin.register: ", err.messsage);
@@ -15,8 +17,8 @@ const register = async ({ body }, res, next) => {
 const update = async ({ body }, res) => {
   console.log(body.data);
   try {
-    await ServiceLogin.update(body.data.id, body);
-    res.status(200).json({ status: 1 });
+    const result = await ServiceLogin.update(body.data.id, body);
+    res.status(200).json({ status: result });
   } catch (err) {
     console.log("ControllerLogin.update: ", err);
     res.status(500).json({ messageError: err.message });
@@ -26,10 +28,7 @@ const update = async ({ body }, res) => {
 const del = async ({ body: {data} }, res) => {
   try {
     const result = await ServiceLogin.del(data.id);
-    if (result) {
-      return res.status(200).json({ status: 1 });
-    }
-    return res.status(400).json({ message: "not Found" });
+      res.status(200).json({ status: result });
   } catch (err) {
     console.log("ControllerLogin.del: ", err.messsage);
     res.status(500).json({ messageError: err.message });
@@ -39,11 +38,10 @@ const del = async ({ body: {data} }, res) => {
 const login = async ({ body }, res, next) => {
   try {
     const result = await ServiceLogin.login(body);
-    if (typeof result === "string") {
-      return res.status(404).json({ message: result });
+    if (result.status) {
+      return res.status(404).json({ message: result.message });
     }
-    body.data = result;
-    console.log("controller", body);
+    body.data = result.body;
     next();
   } catch (err) {
     console.log("ControllerLogin.del: ", err.messsage);

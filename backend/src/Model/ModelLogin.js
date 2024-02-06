@@ -24,17 +24,11 @@ const del = (id) =>
 
 const getEmail = (email) =>
     connection.execute(
-        `SELECT id, nome, email FROM login
+        `SELECT id, nome, email, senha FROM login
          WHERE email = ?;`,
             [email]
 )
 
-const getSenha = (senha) =>
-    connection.execute(
-        `SELECT * FROM login
-         WHERE senha = ?;`,
-            [senha]
-)
 
 const getId = (id) =>
     connection.execute(
@@ -49,6 +43,5 @@ module.exports = {
     update,
     del,
     getEmail,
-    getSenha,
     getId
 }
