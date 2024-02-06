@@ -1,5 +1,3 @@
-const { UtilsLogin } = require("../utils");
-
 const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const validBody = (body) => {
