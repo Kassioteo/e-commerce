@@ -15,7 +15,6 @@ const register = async ({ body }, res, next) => {
 };
 
 const update = async ({ body }, res) => {
-  console.log(body.data);
   try {
     const result = await ServiceLogin.update(body.data.id, body);
     res.status(200).json({ status: result });

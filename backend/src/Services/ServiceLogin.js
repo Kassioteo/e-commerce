@@ -39,10 +39,9 @@ const del = async (id) => {
 const login = async (body) => {
   try {
     const existClient = await UtilsLogin.ExistClient(body)
-    if(existClient.status) {
-      return existClient
-    }
-    console.log(existClient);
+    // if(existClient.status) {
+    //   return existClient
+    // }
     return existClient
   } catch (err) {
     console.log("ServiceLogin.del: ", err);
