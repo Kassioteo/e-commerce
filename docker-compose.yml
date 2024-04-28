@@ -42,7 +42,7 @@ services:
     container_name: container_db
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=database
+      - MYSQL_DATABASE=ecommerce
       - MYSQL_TCP_PORT=3003	
     volumes:
       - ./database.sql:/docker-entrypoint-initdb.d/database.sql
