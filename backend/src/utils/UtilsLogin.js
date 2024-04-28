@@ -8,7 +8,7 @@ const ExistEmail = async (email) => {
   return {status: false, body: result[0]};
 };
 
-const ExistClient = async (client) => {
+const CorrectLogin = async (client) => {
   const {status, body} = await ExistEmail(client.email)
   if (status) {
     return {status: true, message: "Email invalid"};
@@ -21,5 +21,5 @@ const ExistClient = async (client) => {
 
 
 module.exports = {
-    ExistClient
+  CorrectLogin
 }

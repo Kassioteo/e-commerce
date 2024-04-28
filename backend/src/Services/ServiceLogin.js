@@ -3,9 +3,9 @@ const { UtilsLogin } = require("../utils");
 
 const register = async (body) => {
   try {
-    const existClient = await UtilsLogin.ExistClient(body)
-    if(existClient.status === false) {
-      return existClient
+    const CorrectLogin = await UtilsLogin.CorrectLogin(body)
+    if(CorrectLogin.status === false) {
+      return CorrectLogin
     }
     const response = await ModelLogin.register(body);
     const [[result]] = await ModelLogin.getId(response[0].insertId);
@@ -38,11 +38,8 @@ const del = async (id) => {
 
 const login = async (body) => {
   try {
-    const existClient = await UtilsLogin.ExistClient(body)
-    // if(existClient.status) {
-    //   return existClient
-    // }
-    return existClient
+    const CorrectLogin = await UtilsLogin.CorrectLogin(body)
+    return CorrectLogin
   } catch (err) {
     console.log("ServiceLogin.del: ", err);
     throw new Error(`SeriveError: ${err.message}`);
