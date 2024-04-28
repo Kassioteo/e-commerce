@@ -22,6 +22,15 @@ CREATE TABLE clientes (
             FOREIGN KEY (id_endereco) REFERENCES endereco (id_endereco)
 );
 
+CREATE TABLE produtos (
+    id_produto INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(150) NOT NULL,
+    valor INT NOT NULL,
+    categoria VARCHAR(80) NOT NULL,
+    descricao VARCHAR(250) NOT NULL,
+    estoque INT NOT NULL,
+)
+
 
 -- CREATE TABLE compras_efetuadas ()
 
@@ -31,14 +40,6 @@ INSERT INTO cliente ( nome, email, senha) VALUES
     ("stevann","stevann@gmail.com","st123"),
     ("teodoro","teodoro@gmail.com","te123"),
     ("vladimir","vladimir@gmail.com","vl123");
-
-CREATE TABLE products (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(150) NOT NULL,
-    valor INT NOT NULL,
-    categoria VARCHAR(80) NOT NULL,
-    descricao VARCHAR(250) NOT NULL,
-)
 
 -- CREATE TABLE estoque () 
 
