@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS ecommerce;
+-- DROP DATABASE IF EXISTS ecommerce;
 
-CREATE DATABASE ecommerce;
+-- CREATE DATABASE IF NOT EXISTS ecommerce;
 
 USE ecommerce;
 
