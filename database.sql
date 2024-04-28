@@ -1,5 +1,16 @@
 USE database;
 
+CREATE TABLE endereco (
+    id_endereco INT,
+    pais VARCHAR(45) NOT NULL,
+    estado VARCHAR(10) NOT NULL,
+    cidade VARCHAR(45) NOT NULL,
+    rua VARCHAR(75) NOT NULL,
+    numero VARCHAR(25) NOT NULL,
+    observacao VARCHAR(120) NOT NULL,
+        CONSTRAINT PRIMARY KEY(id_endereco)
+);
+
 CREATE TABLE clientes (
     id_cliente INT,
     nome VARCHAR(100) NOT NULL,
@@ -7,8 +18,10 @@ CREATE TABLE clientes (
     senha VARCHAR(25) NOT NULL,
     id_endereco INT,
     telefone_celular VARCHAR(25),
-        CONSTRAINT PRIMARY KEY(id_cliente)
+        CONSTRAINT PRIMARY KEY(id_cliente),
+            FOREIGN KEY (id_endereco) REFERENCES endereco (id_endereco)
 );
+
 
 -- CREATE TABLE compras_efetuadas ()
 
