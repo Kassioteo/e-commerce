@@ -17,7 +17,7 @@ const getEmail = (email) =>
 const getId = (id) =>
   connection.execute(
     `SELECT id_cliente, nome, email, senha FROM clientes
-         WHERE id = ?;`,
+         WHERE id_cliente = ?;`,
     [id]
   );
 
@@ -25,14 +25,14 @@ const update = (id, body) =>
   connection.execute(
     `UPDATE clientes
          SET nome = ?, email = ?, senha = ?
-         WHERE id = ?;`,
+         WHERE id_cliente = ?;`,
     [body.nome, body.email, body.senha, id]
   );
 
 const del = (id) =>
   connection.execute(
     `DELETE FROM clientes
-         WHERE id = ?;`,
+         WHERE id_cliente = ?;`,
     [id]
   );
 

@@ -1,7 +1,7 @@
-const { ModelLogin } = require("../Model");
+const { ModelClientes } = require("../Model");
 
 const ExistEmail = async (email) => {
-  const [result] = await ModelLogin.getEmail(email);
+  const [result] = await ModelClientes.getEmail(email);
   if (result.length === 0) {
     return {status: true};
   }

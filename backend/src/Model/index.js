@@ -1,8 +1,8 @@
 const connection = require("./connection");
-const ModelLogin = require("./ModelLogin");
+const ModelClientes = require("./ModelClientes");
 
 
 module.exports = {
   connection,
-  ModelLogin
+  ModelClientes
 };

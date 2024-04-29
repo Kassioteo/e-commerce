@@ -9,7 +9,7 @@ const register = async ({ body }, res, next) => {
     body.data = result;
     next()
   } catch (err) {
-    console.log("ControllerLogin.register: ", err.messsage);
+    console.log("ControllerLoginError.register: ", err.messsage);
     res.status(500).json({ messageError: err.message });
   }
 };
@@ -19,7 +19,7 @@ const update = async ({ body }, res) => {
     const result = await ServiceLogin.update(body.data.id, body);
     res.status(200).json({ status: result });
   } catch (err) {
-    console.log("ControllerLogin.update: ", err);
+    console.log("ControllerLoginError.update: ", err);
     res.status(500).json({ messageError: err.message });
   }
 };
@@ -29,7 +29,7 @@ const del = async ({ body: {data} }, res) => {
     const result = await ServiceLogin.del(data.id);
       res.status(200).json({ status: result });
   } catch (err) {
-    console.log("ControllerLogin.del: ", err.messsage);
+    console.log("ControllerLoginError.del: ", err.messsage);
     res.status(500).json({ messageError: err.message });
   }
 };
@@ -43,7 +43,7 @@ const login = async ({ body }, res, next) => {
     body.data = result.body;
     next();
   } catch (err) {
-    console.log("ControllerLogin.del: ", err.messsage);
+    console.log("ControllerLoginError.del: ", err.messsage);
     res.status(500).json({ messageError: err.message });
   }
 };
