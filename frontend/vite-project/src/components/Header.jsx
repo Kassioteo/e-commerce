@@ -11,6 +11,7 @@ export default function Header() {
             <header>
                 <h1>E-COMMERCE</h1>    
                 <p>seja bem vindo {client.nome}!!</p>
+                <>categorias</>
             </header>
             );
     } else {

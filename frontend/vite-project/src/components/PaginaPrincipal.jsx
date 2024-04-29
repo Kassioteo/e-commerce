@@ -1,6 +1,6 @@
 import Header from "./Header";
 
-export default function PaginaInicial() {
+export default function PaginaPrincipal() {
     return (
       <>
       <Header/>
