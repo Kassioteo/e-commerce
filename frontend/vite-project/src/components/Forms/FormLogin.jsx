@@ -41,8 +41,9 @@ export default function FormLogin() {
                 onChange={({target}) => setSenha(target.value)}
             />
             <br/>
-            <button>Login</button>
+            <button>logar</button>
             <button onClick={() => navigate('/register')}>Registrar</button>
+            <button onClick={() => navigate('/')}>voltar para pagina inicial</button>
         </form>
     )
 }

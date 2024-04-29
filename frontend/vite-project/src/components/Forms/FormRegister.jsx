@@ -48,7 +48,8 @@ export default function FormRegsiter() {
             />
             <br/>
             <button>registrar</button>
-            <button onClick={() => navigate('/')}>logar</button>
+            <button onClick={() => navigate('/login')}>logar</button>
+            <button onClick={() => navigate('/')}>voltar para pagina inicial</button>
         </form>
     )
 }
