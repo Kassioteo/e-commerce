@@ -1,47 +1,45 @@
-const connection = require('./connection')
+const connection = require("./connection");
 
-const register = (body) =>
-    connection.execute(
-        `INSERT INTO login (nome, email, senha) VALUES
+const create = (body) =>
+  connection.execute(
+    `INSERT INTO clientes (nome, email, senha) VALUES
             (?,?,?);`,
-            [body.nome,body.email,body.senha]
-)
-
-const update = (id, body) =>
-    connection.execute(
-        `UPDATE login
-         SET nome = ?, email = ?, senha = ?
-         WHERE id = ?;`,
-            [body.nome,body.email,body.senha, id]
-)
-
-const del = (id) =>
-    connection.execute(
-        `DELETE FROM login
-         WHERE id = ?;`,
-            [id]
-)
+    [body.nome, body.email, body.senha]
+  );
 
 const getEmail = (email) =>
-    connection.execute(
-        `SELECT id, nome, email, senha FROM login
+  connection.execute(
+    `SELECT id_cliente, nome, email, senha FROM clientes
          WHERE email = ?;`,
-            [email]
-)
-
+    [email]
+  );
 
 const getId = (id) =>
-    connection.execute(
-        `SELECT * FROM login
+  connection.execute(
+    `SELECT id_cliente, nome, email, senha FROM clientes
          WHERE id = ?;`,
-            [id]
-)
+    [id]
+  );
 
+const update = (id, body) =>
+  connection.execute(
+    `UPDATE clientes
+         SET nome = ?, email = ?, senha = ?
+         WHERE id = ?;`,
+    [body.nome, body.email, body.senha, id]
+  );
+
+const del = (id) =>
+  connection.execute(
+    `DELETE FROM clientes
+         WHERE id = ?;`,
+    [id]
+  );
 
 module.exports = {
-    register,
-    update,
-    del,
-    getEmail,
-    getId
-}
+  create,
+  update,
+  del,
+  getEmail,
+  getId,
+};
